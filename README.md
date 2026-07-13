@@ -106,3 +106,16 @@ Implements a concurrent task store supporting safe reads, writes, periodic autos
 - Thread Safety
 - Concurrent State Management
 - Graceful Shutdown
+
+## Future Challenges
+
+Planned topics include:
+
+- YAML parsing and validation
+- Dependency graph resolution
+- Topological sorting
+- HTTP middleware
+- OCI image metadata
+- File packaging
+- Concurrent file processing
+- Kubernetes client interactions
