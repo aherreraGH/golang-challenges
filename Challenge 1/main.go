@@ -8,6 +8,9 @@ import (
 	"localpractice1.com/challenges/types"
 )
 
+/**
+ * Using a worker to handle the jobs and collect results.
+ */
 func worker(workerID int, jobs <-chan types.Package, results chan<- types.DeliveryResult, wg *sync.WaitGroup) {
 	defer wg.Done()
 
@@ -23,6 +26,7 @@ func worker(workerID int, jobs <-chan types.Package, results chan<- types.Delive
 }
 
 func main() {
+	// for now just deal with some addresses are how far the route is for each delivery.
 	packages := []types.Package{
 		{ID: 1, Address: "100 Main Street", Distance: 3},
 		{ID: 2, Address: "200 Oak Avenue", Distance: 1},
@@ -32,6 +36,7 @@ func main() {
 		{ID: 6, Address: "600 River Road", Distance: 2},
 	}
 
+	// make use of channels to handle capturing the jobs and results.
 	jobs := make(chan types.Package)
 	results := make(chan types.DeliveryResult)
 
@@ -56,10 +61,10 @@ func main() {
 		close(results)
 	}()
 
+	// Print results.
 	for result := range results {
 		fmt.Println(result.Status)
 	}
-
-	// Print results.
+	// show some end output
 	fmt.Println("All packages processed")
 }

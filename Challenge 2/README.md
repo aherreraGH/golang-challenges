@@ -1,0 +1,43 @@
+Challenge 2: Temperature Monitoring System
+
+Build a temperature-monitoring program that receives readings from multiple simulated sensors.
+
+Unlike the first challenge, this one should use select to handle:
+
+Incoming sensor readings
+Inactivity timeouts
+Shutdown signals
+
+Use this structure:
+
+```go
+type Reading struct {
+	SensorID    string
+	Temperature float64
+}
+```
+
+Create __three sensor goroutines__. Each sensor periodically sends temperature readings into one shared channel.
+
+The monitoring goroutine must:
+
+Print normal readings
+Print an alert for temperatures at or above 90.0
+Print an inactivity warning if no reading arrives for two seconds
+Stop cleanly when it receives a shutdown signal
+
+__Requirements__
+
+
+
+__Example output__
+
+```bash
+Sensor A: 72.4°F
+Sensor B: 91.3°F — ALERT
+Sensor C: 68.7°F
+Sensor A: 75.1°F
+Warning: no sensor readings received for 2 seconds
+Monitoring system shutting down
+```
+
