@@ -7,15 +7,21 @@ import (
 	"strings"
 )
 
+/**
+ * Ensure the command arg[1] is a valid command keyword
+ * if not, show some error.
+ */
 func handleCommands(ctx context.Context, cmd string, cArgs []string) {
 
 	switch cmd {
 	case "stats":
+		// display a simple statistical output
 		stats := GetInventoryStatistics(ctx)
 		if stats != nil {
 			fmt.Printf("Statistics: %v", stats)
 		}
 	case "list":
+		// show current state of all inventory items
 		books := ListInventory(ctx)
 
 		if books != nil {
@@ -36,7 +42,7 @@ func handleCommands(ctx context.Context, cmd string, cArgs []string) {
 			fmt.Println("No books found, or a server error occurred.")
 		}
 	case "scan":
-		// .\bin\kiosk.exe scan -barcode-path ".\barcodes\LIB-GO-001-A7.png"
+		// simulate scanning a barcode - use local image for this challenge.
 		book, err := Scan(ctx, cArgs)
 		if err != nil {
 			fmt.Println("Failed to scan:", err.Error())
@@ -58,7 +64,7 @@ func handleCommands(ctx context.Context, cmd string, cArgs []string) {
 			}
 		}
 	case "checkout":
-		// .\bin\kiosk.exe checkout -who "Joe" -barcode-path ".\barcodes\LIB-GO-001-A7.png"
+		// simulate checking out a book, use the local barcode images.
 		book, err := CheckOutCheckInBook(ctx, cArgs, cmd)
 		if err != nil {
 			fmt.Println("Failed to scan:", err.Error())
@@ -80,7 +86,7 @@ func handleCommands(ctx context.Context, cmd string, cArgs []string) {
 			}
 		}
 	case "checkin":
-		// .\bin\kiosk.exe checkout -who "Joe" -barcode-path ".\barcodes\LIB-GO-001-A7.png"
+		// simulate checking in a book, use the local image.
 		book, err := CheckOutCheckInBook(ctx, cArgs, cmd)
 		if err != nil {
 			fmt.Println("Failed to scan:", err.Error())
@@ -104,7 +110,8 @@ func handleCommands(ctx context.Context, cmd string, cArgs []string) {
 			}
 		}
 	case "generate":
-		// .\bin\kiosk.exe generate -codes "LIB-GO-001-A7,LIB-SYS-204-K9,LIB-MATH-88-Z3" -path "./barcodes"
+		// Generate barcodes based on the code text. This is needed so that the package to read the barcodes
+		// can properly convert the generated image to the correct barcode text value.
 		err := Generate(cArgs)
 		if err != nil {
 			fmt.Println("Failed to generate:", err.Error())

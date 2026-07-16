@@ -18,6 +18,9 @@ const (
 	minHeight = 100
 )
 
+/**
+ * Read the barcode image file
+ */
 func Read(path string) (string, error) {
 
 	_, err := os.Stat(path)

@@ -17,6 +17,9 @@ import (
 // 	"LIB-MATH-88-Z3",
 // }
 
+/**
+ * Create a new barcode image file
+ */
 func Create(barcodeIDs string, outputDir string) error {
 	const (
 		width  = 600
@@ -39,6 +42,9 @@ func Create(barcodeIDs string, outputDir string) error {
 	return nil
 }
 
+/**
+ * Actual barcode file generation.
+ */
 func generateBarcode(
 	outputDir string,
 	value string,

@@ -9,6 +9,9 @@ type AppConfig struct {
 	Config Config
 }
 
+/**
+ * Load the configuration once.
+ */
 func (c *AppConfig) LoadConfigurations() (string, error) {
 	// check for config.json
 	_, err := os.Stat("./conf/config.json")

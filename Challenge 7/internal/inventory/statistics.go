@@ -4,6 +4,8 @@ import (
 	"sync/atomic"
 )
 
+// Use atomic to maintain simple incremental values.
+// No need to RLock/Lock here.
 type Statistics struct {
 	checkouts atomic.Uint64
 	checkins  atomic.Uint64

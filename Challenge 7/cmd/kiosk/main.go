@@ -26,5 +26,6 @@ func main() {
 	cmd := os.Args[1]
 	cArgs := os.Args[2:]
 
+	// handle command keywords and args
 	handleCommands(ctx, cmd, cArgs)
 }

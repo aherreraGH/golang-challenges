@@ -13,6 +13,7 @@ import (
 	"localpractice7.com/challenges/internal/checkout"
 )
 
+// the book struct object.
 type Book struct {
 	BarcodeID    string    `json:"barcode_id"`
 	Title        string    `json:"title"`
@@ -27,6 +28,8 @@ type Book struct {
 	AmountDue    float64   `json:"amountDue"`
 }
 
+// Inventory object, contains 0-many books.
+// Also shows the use of sync/mutex, which will use RLock/Lock to ensure deadlocks do not occur.
 type Inventory struct {
 	mu    sync.RWMutex
 	books []*Book
