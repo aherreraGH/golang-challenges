@@ -107,6 +107,109 @@ Implements a concurrent task store supporting safe reads, writes, periodic autos
 - Concurrent State Management
 - Graceful Shutdown
 
+### Challenge 7 - Library Inventory Management System
+
+**Concepts covered:**
+
+- REST API design using Go's `net/http`
+- Client/server architecture
+- JSON-based data persistence
+- CLI application development
+- Barcode generation and image decoding (Code 128)
+- Inventory state management
+- HTTP request/response handling
+- Struct modeling and JSON serialization
+- Package organization and separation of concerns
+- Date/time calculations and business rules
+- State transitions (checkout/checkin workflows)
+- Error handling and API error responses
+- Concurrency management:
+  - `sync.RWMutex` for protecting shared inventory state
+  - `sync.Mutex` concepts for exclusive write operations
+  - `sync/atomic` for lock-free statistics counters
+- Thread-safe service design
+- Internal helper methods for lock ownership (`findUnsafe`)
+- Data ownership and defensive copying (`cloneBook`)
+
+## Initial structure
+
+__Note:__ This evovled a bit from the initial setup.
+
+```bash
+library-inventory/
+│
+├── cmd/
+│   ├── kiosk/
+│   │   └── main.go
+│   │
+│   └── circulation-server/
+│       └── main.go
+│
+├── internal/
+│   ├── api/
+│   │   ├── handlers.go
+│   │   ├── router.go
+│   │   └── client.go
+│   │
+│   ├── inventory/
+│   │   ├── store.go
+│   │   ├── service.go
+│   │   └── persistence.go
+│   │
+│   ├── checkout/
+│   │   ├── service.go
+│   │   └── calculations.go
+│   │
+│   ├── barcode/
+│   │   └── decoder.go
+│   │
+│   ├── report/
+│   │   └── report.go
+│   │
+│   └── models/
+│       ├── book.go
+│       ├── checkout.go
+│       ├── user.go
+│       └── responses.go
+│
+├── data/
+│
+├── barcodes/
+│
+├── go.mod
+├── go.sum
+└── README.md
+```
+
+## About Mutex
+
+```bash
+RWMutex
+-------
+Protects inventory state:
+- books
+- status
+- borrowers
+- due dates
+
+
+atomic
+------
+Protects independent counters:
+- requests
+- checkouts
+- checkins
+
+
+context
+-------
+Controls:
+- shutdown
+- cancellation
+- request lifecycle
+```
+
+
 ## Future Challenges
 
 Planned topics include:
