@@ -1,0 +1,20 @@
+[
+  {
+    "user_id": "USR-1001",
+    "name": "Avery Stone",
+    "role": "member",
+    "active": true
+  },
+  {
+    "user_id": "USR-1002",
+    "name": "Jordan Lee",
+    "role": "member",
+    "active": true
+  },
+  {
+    "user_id": "USR-9001",
+    "name": "Morgan Reed",
+    "role": "librarian",
+    "active": true
+  }
+]
